@@ -12,7 +12,7 @@ import { useFavorites } from '@/hooks/useFavorites';
 import { FavoritePokemon } from '@/types/pokemon';
 
 export function PokedexContainer() {
-  const { pokemon, loading, fetchPokemonById, nextPokemon, prevPokemon, searchByNumber } = usePokemon();
+  const { pokemon, loading, fetchPokemonById, nextPokemon, prevPokemon, searchByNumber, nextEvolution, prevEvolution } = usePokemon();
   const { favorites, add, remove, update } = useFavorites();
   const [editingPokemon, setEditingPokemon] = useState<FavoritePokemon | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -50,6 +50,8 @@ export function PokedexContainer() {
             loading={loading}
             onPrev={prevPokemon}
             onNext={nextPokemon}
+            onPrevEvolution={prevEvolution}
+            onNextEvolution={nextEvolution}
           />
           <Binding />
           <RightPanel

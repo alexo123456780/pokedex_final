@@ -68,3 +68,45 @@ export function getMaxPokemonId(): number {
 export function capitalizeFirst(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+interface EvolutionChainLink {
+  species: { name: string; url: string };
+  evolves_to: EvolutionChainLink[];
+}
+
+interface EvolutionChainResponse {
+  chain: EvolutionChainLink;
+}
+
+interface PokemonSpeciesResponse {
+  evolution_chain: { url: string };
+}
+
+function extractEvolutionIds(chain: EvolutionChainLink, ids: number[] = []): number[] {
+  const speciesId = parseInt(chain.species.url.split('/').filter(Boolean).pop() || '0');
+  ids.push(speciesId);
+
+  for (const evolution of chain.evolves_to) {
+    extractEvolutionIds(evolution, ids);
+  }
+
+  return ids;
+}
+
+export async function getEvolutionChain(pokemonId: number): Promise<number[]> {
+  try {
+    const speciesResponse = await fetch(`${BASE_URL}/pokemon-species/${pokemonId}`);
+    if (!speciesResponse.ok) return [pokemonId];
+
+    const speciesData: PokemonSpeciesResponse = await speciesResponse.json();
+    const evolutionUrl = speciesData.evolution_chain.url;
+
+    const evolutionResponse = await fetch(evolutionUrl);
+    if (!evolutionResponse.ok) return [pokemonId];
+
+    const evolutionData: EvolutionChainResponse = await evolutionResponse.json();
+    return extractEvolutionIds(evolutionData.chain);
+  } catch {
+    return [pokemonId];
+  }
+}

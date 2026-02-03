@@ -165,7 +165,7 @@
   width: 220px;
   border-radius: 10px;
   position: relative;
-  left: 30px;
+  right: 10px;
   top: 35px;
   display: flex;
   justify-content: center;
@@ -403,16 +403,7 @@
   top: 25px;
 }
 
-/* Rounded bordure right  */
-.roundBordureRightSide {
-  width: 250px;
-  height: 60px;
-  background: #ffffff;
-  position: absolute;
-  top: 0;
-  right: -50px;
-  transform: skew(50deg);
-}
+
 
 /* Right side screen */
 .screenRight {

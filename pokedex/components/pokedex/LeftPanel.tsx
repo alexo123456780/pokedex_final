@@ -9,9 +9,11 @@ interface LeftPanelProps {
   loading: boolean;
   onPrev: () => void;
   onNext: () => void;
+  onPrevEvolution: () => void;
+  onNextEvolution: () => void;
 }
 
-export function LeftPanel({ pokemon, loading, onPrev, onNext }: LeftPanelProps) {
+export function LeftPanel({ pokemon, loading, onPrev, onNext, onPrevEvolution, onNextEvolution }: LeftPanelProps) {
   return (
     <div className={styles.leftSide}>
       <div className={styles.roundBordureLeftSide}></div>
@@ -78,11 +80,11 @@ export function LeftPanel({ pokemon, loading, onPrev, onNext }: LeftPanelProps) 
       
       {/* Cross control */}
       <div className={styles.crossContainer}>
-        <div className={`${styles.cross} ${styles.crossTop} ${styles.clickable}`} onClick={onPrev}>
+        <div className={`${styles.cross} ${styles.crossTop} ${styles.clickable}`} onClick={onPrevEvolution}>
           <div className={`${styles.arrow} ${styles.arrowTop}`}></div>
         </div>
         <div className={`${styles.cross} ${styles.crossMid}`}></div>
-        <div className={`${styles.cross} ${styles.crossBottom} ${styles.clickable}`} onClick={onNext}>
+        <div className={`${styles.cross} ${styles.crossBottom} ${styles.clickable}`} onClick={onNextEvolution}>
           <div className={`${styles.arrow} ${styles.arrowBottom}`}></div>
         </div>
         <div className={`${styles.cross} ${styles.crossLeft} ${styles.clickable}`} onClick={onPrev}>
