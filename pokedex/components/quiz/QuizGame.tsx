@@ -148,7 +148,7 @@ export function QuizGame() {
                 className={`${styles.controlButton} ${styles.nextButton}`}
                 onClick={handleNextQuestion}
               >
-                Siguiente Pokémon →
+                Siguiente Pokémon
               </button>
             )}
             <button
